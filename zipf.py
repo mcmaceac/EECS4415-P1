@@ -24,22 +24,26 @@ for line in sys.stdin:
 			else:
 				occurences[word] += 1	#the word is in the dictionary, increment count by 1
 
-#sorting by value
+
+topTen = occurences.items()
+topTen = sorted(topTen, key=lambda x: x[0])						#sorting by the key ascending first
+topTen = sorted(topTen, key=lambda x: x[1], reverse=True)[:10]	#sorting by the value descending second
+
 
 
 #extracting the top ten entries in the dictionary
-topTen = sorted(occurences, key=occurences.get, reverse=True)[:10]
+#topTen = sorted(occurences, key=occurences.get, reverse=True)[:10]
 xAxis = []
 yAxis = []
 for val in topTen:
 	#print('%s\t%s' % (val, occurences[val]))
-	xAxis.append(val)
-	yAxis.append(occurences[val])
+	xAxis.append(val[0])
+	yAxis.append(occurences[val[0]])
 
 #print(xAxis)
 #print(yAxis)
 
-#setting up the graph of the top words
+#setting up the graph of the top
 yPos = np.arange(len(xAxis))
 plot.bar(yPos, yAxis, align='center', alpha=0.5)
 plot.xticks(yPos, xAxis)
