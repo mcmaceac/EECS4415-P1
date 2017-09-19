@@ -27,9 +27,63 @@ for line in sys.stdin:
 #sorting by value
 
 
-topTen = sorted(occurences, key=occurences.get, reverse=True)
-topTen = topTen[:10]							
+#extracting the top ten entries in the dictionary
+topTen = sorted(occurences, key=occurences.get, reverse=True)[:10]
+xAxis = []
+yAxis = []
 for val in topTen:
-	print('%s\t%s' % (val, occurences[val]))
+	#print('%s\t%s' % (val, occurences[val]))
+	xAxis.append(val)
+	yAxis.append(occurences[val])
 
-#print('%s' % str(occurences))
+#print(xAxis)
+#print(yAxis)
+
+#setting up the graph of the top words
+yPos = np.arange(len(xAxis))
+plot.bar(yPos, yAxis, align='center', alpha=0.5)
+plot.xticks(yPos, xAxis)
+plot.ylabel('#occurences')
+plot.title('top ten words')
+
+plot.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
