@@ -12,22 +12,21 @@ with open('stopwords-MySQL.txt', 'r') as f:		#open the file and read the content
 
 for line in sys.stdin:
 	line = line.strip()
-	words = filter(None, re.split('[^a-zA-Z0-9\']', line))		#separating on white space(had to include ' becuase it was filtering on contractions)
+	words = filter(None, re.split('[\W+_]', line))		#separating on white space(had to include ' becuase it was filtering on contractions)
 	words = map(lambda x:x.lower(), words)			#convering words to lowercase
 	
 	for word in words:
-		if word not in stopWords:		#checking to see if the word is a stop word
-			if word[-2:] == '\'s':		#required in order to filter multiples of words
-				word = word[:-2]
+		if word not in stopWords and len(word) != 1:		#checking to see if the word is a stop word
 			if word not in occurences:	#the word is not already in the dictionary
 				occurences[word] = 1
 			else:
-				occurences[word] += 1	#the word is in the dictionary, increment count by 1
+				occurences[word] += 1	#the word is in the dictionary, increment its count by 1
 
 
-topTen = occurences.items()
+topTen = occurences.items()			#converting dictionary to list for easier sorting
 topTen = sorted(topTen, key=lambda x: x[0])						#sorting by the key ascending first
 topTen = sorted(topTen, key=lambda x: x[1], reverse=True)[:10]	#sorting by the value descending second
+																#and extracting the top 10
 
 
 
