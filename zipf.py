@@ -1,3 +1,8 @@
+#Written by: Matthew MacEachern
+#Student #: 213960216
+#York email: mcmaceac@my.yorku.ca
+
+
 import numpy as np 
 import matplotlib.pyplot as plot 
 import sys
